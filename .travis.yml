@@ -3,8 +3,14 @@ python:
   - "3.9"
 install:
   - pip install -r requirements.txt
+addons:
+  sonarcloud:
+    organization: "devops-kf"
+    token:
+      secure: "qqp6Hc6dActC3AKKoMJqJts4X3eDpuRdcJK8WltEhWqGofnTW43P1YBniiCAtZqjWX3uy0fXAUOuzeqzu0u7MaCNwYL8QbF6hGgI6iDRBmYSruiVayeRirvi0E1SqjxeFPdg6y2wZXhRAVCLVuJhLbVF9IqNjIdGtc3ng698cauQygWEu3wcctuZ0YS19XI4pbGtBMmgsu7tm4kxvgDt9qltzPWWS5iNezMWJq66Fna15CehfDn9TT61IJMcprdpT9sBdbCqxavAkpUih6oja3N1rqh5naoOlXRdOrL2fAqHdR8pjgAggnqN6wrgOAqvqOiiKwEzsjyZCFsrJoR/RdeGvBuJrojDx9lpQSal7kck6Vp58y5m6Gr96zdRCPcQ2PcZNfjTm/1V5RLnVavhwWJn75FGVj55o3+EPE2XQO7k8pOPpYuf3wZGE3tNErEClwON0G3E2us8uUIlzEFW0gIXFaoc+GbyDYOTbJlsJILqPE98vAsNPj42llmffG6YHL9sRoqt2zCHLe7jjiZg+p8VnuXbh/gF9jLd9DK9WbIkzJfuGyPCHyi0IyeUujZt03yfN5Ccy17Fr8u6chs9+DKTWQ2ru3+ODngUSuBk/arrf4Ii7ehaZWbWepeX5AhkfZMlKWOphkqIW1qW/XfPEnoz4AD4g+lrSOZHNUyi9aI="
 script:
   - pytest
+  - sonar-scanner
 branches:
   only:
     - main

@@ -10,7 +10,7 @@ addons:
       secure: "opxQhcjEkHLVjlNHbEDvryC/wlH9jKA1wRe8MRrcizHmIE2Y70Q4LqOWYxNg0UXmGa4fBBTCP/kA+8d0/zcyw+ACheVXHqLF+8SAnY8wSeR/9FNcrXvQrkUK70mhd0yh+dEqOgAMyH+eKegPICbDgwMpotIveKqF5y/D7XBNiH8fqHi80DftIvlTNAuuK4A28wyt8B4jZG/iq8k1uohBk56IF9gLOBcHoom0slvIGJQjbsbQXoH1Ew1Zd1QxsxQ75kB3QxAZpVDl8KY+Ftdu7ga/MMQ+I+Ir6vtyurbQa2nBH0eB+s2m+NoL9XhP8anTRGXLC9NhKopx3HoWLTchjp70CjkZ8wVL5DGtYaFzBAaJ0wxXmhg1oE/qDqP9Gtew5TZtIFUaJC33VRP2teUFGIegPFH5/+bUV29Q240Afxu7TzkmBAXIeomlv9u17SB8ilHhKSMNy/oaJ4gOsFaC5I6OPdM91NWARo+Fps0kpB6GzlKWTiF/pgvvzLNQmUJJDUAJtTVVoi/aJdAIdv8uwWaSStKzKpQRdLxAbdKCenaISpcKoBgyZ++NTTDM44IxExLy5aZiwdlVLBEIyksERIR1QHwreCo5lSwrxZD3YErteNaGiBQd1u8QhF+mZlg2b7Q2HCfRYV4WYvoyuj3pd+lFzRx9p/wHDNw76IILlWU="
 script:
   - pytest
-  - sonar-scanner
+  - sonar-scanner -X
 branches:
   only:
     - main

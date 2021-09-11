@@ -13,8 +13,8 @@ class FollowRelationship(Base):
     __tablename__ = 'follow_relationships'
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    follower_profile_id = Column(UUID(as_uuid=True), ForeignKey('user_profile.id'), default=uuid.uuid4)
-    following_profile_id = Column(UUID(as_uuid=True), ForeignKey('user_profile.id'), default=uuid.uuid4)
+    follower_profile_id = Column(UUID(as_uuid=True), ForeignKey('user_profiles.id'), default=uuid.uuid4)
+    following_profile_id = Column(UUID(as_uuid=True), ForeignKey('user_profiles.id'), default=uuid.uuid4)
     is_accepted = Column(Boolean, nullable=False)
     is_muted = Column(Boolean, nullable=False, default=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

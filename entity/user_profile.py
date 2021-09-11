@@ -23,7 +23,7 @@ class UserProfile(Base):
     __tablename__ = 'user_profiles'
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey('user_account.id'), unique=True, default=uuid.uuid4)
+    user_id = Column(UUID(as_uuid=True), ForeignKey('user_accounts.id'), unique=True, default=uuid.uuid4)
     profile_image_url = Column(String(255), nullable=False)
     name = Column(String(63), nullable=False)
     bio = Column(String(255), nullable=False)

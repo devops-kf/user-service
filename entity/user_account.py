@@ -27,7 +27,7 @@ class UserAccount(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     username = Column(String(31), unique=True, nullable=False)
-    password = Column(String(127), nullable=False)
+    password = Column(String(60), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     account_type = Column(Enum(AccountType), nullable=False)
     account_status = Column(Enum(AccountStatus), nullable=False)

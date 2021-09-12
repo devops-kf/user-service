@@ -2,14 +2,15 @@ import enum
 import uuid
 from dataclasses import dataclass, asdict
 
-from sqlalchemy import DateTime, Column, String, Boolean, Enum, ForeignKey, Date
+from sqlalchemy import DateTime, Column, String, Boolean, Enum, ForeignKey, Date, Integer, Table
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from entity import Base
 
 
-class Sex(enum.Enum):
+class Gender(enum.Enum):
     MALE = 0
     FEMALE = 1
 
@@ -25,7 +26,7 @@ class UserProfile(Base):
     bio = Column(String(255), nullable=False)
     phone_number = Column(String(31), nullable=False)
     date_of_birth = Column(Date, nullable=False)
-    sex = Column(Enum(Sex), nullable=False)
+    gender = Column(Enum(Gender), nullable=False)
     country = Column(String(127), nullable=False)
     interests = Column(String(127), nullable=False)
     shop_url = Column(String(255), nullable=False)
@@ -34,14 +35,14 @@ class UserProfile(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     def __init__(self, user_id, profile_image_url, name, bio, phone_number,
-                 date_of_birth, sex, country, interests, shop_url, is_private):
+                 date_of_birth, gender, country, interests, shop_url, is_private):
         self.user_id = user_id
         self.profile_image_url = profile_image_url
         self.name = name
         self.bio = bio
         self.phone_number = phone_number
         self.date_of_birth = date_of_birth
-        self.sex = sex
+        self.gender = gender
         self.country = country
         self.interests = interests
         self.shop_url = shop_url

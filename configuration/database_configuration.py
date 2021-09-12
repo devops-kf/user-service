@@ -15,7 +15,7 @@ def initialize_database(database_uri: str):
     # NOTE (fivkovic): These entity class imports are required for the DB engine to create the tables successfully.
 
     from entity.user_account import UserAccount, AccountType, AccountStatus
-    from entity.user_profile import UserProfile, Sex
+    from entity.user_profile import UserProfile, Gender
     from entity.follow_relationship import FollowRelationship
     from entity.block_relationship import BlockRelationship
 

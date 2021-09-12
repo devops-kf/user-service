@@ -1,7 +1,6 @@
 import bcrypt
 
 from entity.user_account import UserAccount, AccountType, AccountStatus
-from exception.api_error import ApiError
 from exception.service_errors import UserAccountError
 from repository import user_account_repository
 

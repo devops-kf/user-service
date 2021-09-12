@@ -18,7 +18,7 @@ class RegistrationRequestBodyParamsSchema(RequestBodyParamsSchema):
     gender = fields.Integer(required=True, validate=validate.OneOf([0, 1]),
                             error_messages={'unsupported_type': "Unsupported gender type."})
     country = fields.String(required=True, validate=validate.Length(min=2, max=60))
-    interests = fields.String(required=True, validate=validate.Length(min=1, max=30))
+    interests = fields.List(fields.Integer(), required=True, validate=validate.Length(min=1, max=7))
     shop_url = fields.URL(required=False, schemes=['http', 'https'],
                           error_messages={'unsupported_url': "Invalid shop URL."})
 

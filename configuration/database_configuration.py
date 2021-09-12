@@ -1,16 +1,15 @@
-from os import environ
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.pool import NullPool
 
 from entity import Base
 
-engine = create_engine(environ.get('SQLALCHEMY_DATABASE_URI'), poolclass=NullPool)
-db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
+def initialize_database(database_uri: str):
 
-def initialize_database():
+    engine = create_engine(database_uri, poolclass=NullPool)
+    db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
+
     # NOTE (fivkovic): These entity class imports are required for the DB engine to create the tables successfully.
 
     from entity.user_account import UserAccount, AccountType, AccountStatus

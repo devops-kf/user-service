@@ -34,7 +34,7 @@ class UserAccount(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    def __init__(self, username, password, email, account_type, account_status):
+    def __init__(self, username, password, email, account_type, account_status=AccountStatus.PENDING_VERIFICATION):
         self.username = username
         self.password = password
         self.email = email

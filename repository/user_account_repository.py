@@ -14,5 +14,5 @@ def exists_by_username(username: str):
 
 
 def exists_by_email(email: str):
-    return db_scoped_session.query(UserAccount.email).filter_by(username=email).first() is not None
+    return db_scoped_session.query(UserAccount.email).filter_by(email=email).first() is not None
 

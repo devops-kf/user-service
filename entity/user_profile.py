@@ -14,10 +14,6 @@ class Sex(enum.Enum):
     FEMALE = 1
 
 
-class Interests(enum.Enum):
-    NONE = 0
-
-
 @dataclass
 class UserProfile(Base):
     __tablename__ = 'user_profiles'
@@ -31,7 +27,7 @@ class UserProfile(Base):
     date_of_birth = Column(Date, nullable=False)
     sex = Column(Enum(Sex), nullable=False)
     country = Column(String(127), nullable=False)
-    interests = Column(Enum(Interests), nullable=False)
+    interests = Column(String(127), nullable=False)
     shop_url = Column(String(255), nullable=False)
     is_private = Column(Boolean, nullable=False)
     allow_tagging = Column(Boolean, nullable=False, default=True)

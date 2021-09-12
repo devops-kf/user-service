@@ -5,6 +5,13 @@ from exception.api_error import ApiError
 from schemas.base import RequestPathParamsSchema, RequestQueryParamsSchema, RequestBodyParamsSchema
 
 
+class ApiRequestData:
+    def __init__(self, path_params_data, query_params_data, body_data):
+        self.path_params = path_params_data
+        self.query_params = query_params_data
+        self.body = body_data
+
+
 class ApiRequestHandler:
 
     @classmethod
@@ -32,9 +39,4 @@ class ApiRequestHandler:
                 body_data.update(cls.__schema_check(schema=schema, json_data=request.get_json(),
                                                     title='One or more request body parameters invalid.'))
 
-        request_data = object()
-        setattr(request_data, 'path_params', path_params_data)
-        setattr(request_data, 'query_params', query_params_data)
-        setattr(request_data, 'body', body_data)
-
-        return request_data
+        return ApiRequestData(path_params_data, query_params_data, body_data)

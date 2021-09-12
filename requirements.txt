@@ -2,6 +2,8 @@ alembic==1.6.5
 aniso8601==9.0.1
 atomicwrites==1.4.0
 attrs==21.2.0
+bcrypt==3.2.0
+cffi==1.14.6
 click==8.0.1
 colorama==0.4.4
 Flask==2.0.1
@@ -17,9 +19,12 @@ itsdangerous==2.0.1
 Jinja2==3.0.1
 Mako==1.1.5
 MarkupSafe==2.0.1
+marshmallow==3.13.0
 packaging==21.0
 pluggy==0.13.1
+psycopg2==2.9.1
 py==1.10.0
+pycparser==2.20
 pyparsing==2.4.7
 pytest==6.2.4
 pytest-mock==3.6.1
@@ -29,5 +34,6 @@ pytz==2021.1
 six==1.16.0
 SQLAlchemy==1.4.23
 toml==0.10.2
+webargs==8.0.1
 Werkzeug==2.0.1
 WTForms==2.3.3

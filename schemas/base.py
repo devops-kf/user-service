@@ -11,3 +11,7 @@ class RequestQueryParamsSchema(Schema):
 
 class RequestBodyParamsSchema(Schema):
     pass
+
+
+class ResponseSchema(Schema):
+    pass

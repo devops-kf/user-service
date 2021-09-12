@@ -1,6 +1,6 @@
 from marshmallow import validate, fields
 
-from schemas.base import RequestBodyParamsSchema
+from schemas.base import RequestBodyParamsSchema, ResponseSchema
 
 
 class RegistrationRequestBodyParamsSchema(RequestBodyParamsSchema):
@@ -22,3 +22,10 @@ class RegistrationRequestBodyParamsSchema(RequestBodyParamsSchema):
     shop_url = fields.URL(required=False, schemes=['http', 'https'],
                           error_messages={'unsupported_url': "Invalid shop URL."})
 
+
+class RegistrationResponseSchema(ResponseSchema):
+    user_profile_id = fields.String()
+    username = fields.String()
+    email = fields.Email()
+    account_type = fields.Integer()
+    created_at = fields.String()

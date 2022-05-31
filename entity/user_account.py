@@ -15,9 +15,9 @@ class AccountType(enum.Enum):
 
 
 class AccountStatus(enum.Enum):
-    PENDING_VERIFICATION = 0
-    PENDING_REGISTRATION_APPROVAL = 1
-    REGISTERED = 2
+    CREATED = 0
+    PENDING_APPROVAL = 1
+    ACTIVE = 2
     SUSPENDED = 3
 
 
@@ -34,7 +34,11 @@ class UserAccount(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
+<<<<<<< Updated upstream
     def __init__(self, username, password, email, account_type, account_status):
+=======
+    def __init__(self, username, password, email, account_type, account_status=AccountStatus.CREATED):
+>>>>>>> Stashed changes
         self.username = username
         self.password = password
         self.email = email

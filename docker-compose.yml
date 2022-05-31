@@ -1,0 +1,102 @@
+version: "3.8"
+
+networks:
+  backend_network:
+    name: "backend_network"
+    external: true
+  public_network:
+    name: "public_network"
+    driver: bridge
+
+services:
+  user-service:
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    environment:
+      FLASK_ENV: development
+      FLASK_RUN_HOST: 0.0.0.0
+      DB_TYPE: postgresql
+      DB_DRIVER: psycopg2
+      DB_HOST: user_service_db_server
+      DB_NAME: user_service_db
+      DB_USER: devops-kf
+      DB_PASSWORD: 2021
+      TEST_DATABASE_URI: sqlite:///test_database.db
+      DEVELOPMENT_DATABASE_URI: postgresql+psycopg2://devops-kf:2021@user_service_db_server/user_service_db
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://devops-kf:2021@user_service_db_server/user_service_db
+      RABBITMQ_URI: amqps://djindiqe:Cn89FTv6pllXNyKnGuOPWz0vwzE26FGe@cow.rmq2.cloudamqp.com/djindiqe
+    networks:
+      - "backend_network"
+    ports:
+      - "9001:5000"
+    hostname: user-service
+    depends_on:
+      - user_service_db_server
+    #  - integration-events-service
+    command: sh -c "sleep 10 && python app.py"
+    restart: on-failure:5
+    deploy:
+      restart_policy:
+        delay: 50s
+        condition: on-failure
+        max_attempts: 5
+        window: 10s
+
+#  integration-events-service:
+#    container_name: integration-events-service
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    environment:
+#      TEST_DATABASE_URI: sqlite:///test_database.db
+#      DEVELOPMENT_DATABASE_URI: postgresql+psycopg2://devops-kf:2021@user_service_db_server/user_service_db
+#      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://devops-kf:2021@user_service_db_server/user_service_db
+#      RABBITMQ_URI: amqps://djindiqe:Cn89FTv6pllXNyKnGuOPWz0vwzE26FGe@cow.rmq2.cloudamqp.com/djindiqe
+#    networks:
+#      - "backend_network"
+#    depends_on:
+#      - user_service_db_server
+#    command: sh -c "sleep 5 && python -u integration/consume.py"
+#    restart: on-failure:5
+#    deploy:
+#      restart_policy:
+#        delay: 50s
+#        condition: on-failure
+#        max_attempts: 5
+#        window: 10s
+
+  user_service_db_server:
+    container_name: user_service_db_server
+    image: postgres:13.4
+    volumes:
+      - user-service-sql-data:/var/lib/postgresql
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: user_service_db
+      POSTGRES_USER: devops-kf
+      POSTGRES_PASSWORD: 2021
+    networks:
+      - "backend_network"
+    ports:
+      - "10001:5432"
+
+  db-pgadmin:
+    container_name: db-pgadmin
+    image: dpage/pgadmin4:5.6
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    networks:
+      - "backend_network"
+      - "public_network"
+
+volumes:
+  user-service-sql-data: {}
